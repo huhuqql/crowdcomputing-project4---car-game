@@ -16,9 +16,18 @@
             position: absolute;
             border: none;
             left: 0px;
-            top: 150px;
+            top: 170px;
             padding: 5px;
             width: 300px;
+        }
+
+        #start {
+            position: absolute;
+            border: none;
+            left: 100px;
+            top: 200px;
+            padding: 5px;
+            width: 100px;
         }
 
         #car {
@@ -26,7 +35,7 @@
             height: 50px;
             position: absolute;
             left: 225px;
-            top: 450px;
+            top: 430px;
         }
 
         #car_1 {
@@ -57,6 +66,9 @@
             font: 16px normal arial, verdana, sans-serif;
             color: red;
             padding: 10px;
+            position: absolute;
+            left: 350px;
+            top: 250px;
         }
 
         #gameboard {
@@ -103,7 +115,7 @@
         var timer_c = null;
         var start = null;
         var gameover = null;
-
+        var start = null;
 
         function gameOver(){
             window.clearTimeout(timer1);
@@ -141,6 +153,7 @@
         }
 
 
+
         var timer_temp_car_2 = null;
         function moveCar_2() {
             //console.log("drop");
@@ -175,7 +188,7 @@
                 ufo_left_temp = ufo.style.left;
                 ufo.style.visibility = 'hidden';
                 window.clearTimeout(timer_ufo);
-                console.log("stop");
+                //console.log("stop");
                 timer_temp_ufo = setTimeout(call_moveUfo, 5000);
                 //window.clearTimeout(call_moveUfo);
             }
@@ -203,7 +216,7 @@
         }
 
         function moveright() {
-            if (parseInt(car.style.left) < 250) {
+            if (parseInt(car.style.left) < 260) {
                 car.style.left = parseInt(car.style.left) + 10 + 'px';
             }
         }
@@ -271,6 +284,19 @@
             timer_crash_ufo = setTimeout(crash_ufo, 25);
         }
 
+        function startGame(){
+            start.style.visibility = 'hidden';
+            scoreUp();
+            var timer_temp_1 = setTimeout(call_moveCar_1, 2000);
+            var timer_temp_2 = setTimeout(call_moveCar_2, 3000);
+            var timer_temp_3 = setTimeout(call_moveUfo, 5000);
+            // call_moveCar_2();
+            // call_moveCar_1();
+            crash_car_1();
+            crash_car_2();
+            crash_ufo();
+        }
+
 
         window.onload = function () {
             gameboard = document.getElementById("gameboard");
@@ -280,11 +306,13 @@
             start = document.getElementById("start");
             ufo = document.getElementById("ufo");
             gameover = document.getElementById("gameover");
+            start = document.getElementById("start");
 
+
+            //start.onclick = startGame();
             gameover.style.visibility = 'hidden';
-            scoreUp();
             car.style.left = '125px';
-            car.style.top = '450px';
+            car.style.top = '440px';
             // enemy_1.style.left = Math.random() * 300;
             enemy_1.style.left = Math.random() * 250;
             enemy_1.style.top = '0px';
@@ -296,19 +324,9 @@
             ufo_left_temp = ufo.style.left;
             ufo.style.top = '0px';
             ufo.style.visibility = 'hidden';
-            console.log('start = ' + ufo_left_temp);
+            //console.log('start = ' + ufo_left_temp);
 
             //timer_c = setTimeout(moveCar_2, 5000);
-            
-            var timer_temp_1 = setTimeout(call_moveCar_1, 2000);
-            var timer_temp_2 = setTimeout(call_moveCar_2, 3000);
-            var timer_temp_3 = setTimeout(call_moveUfo, 5000);
-            // call_moveCar_2();
-            // call_moveCar_1();
-
-            crash_car_1();
-            crash_car_2();
-            crash_ufo();
 
             //call_moveUfo();
 
@@ -326,7 +344,6 @@
 <body>
     <div id="range">
         <div id="score"> </div>
-        <div id="start" alt="start"> </div>
         <div id="demo">
             <div id="demo1">
                 <a href="#"><img src="road.png" border="0" /></a>
@@ -342,6 +359,7 @@
         <img alt="enemy_2" id="car_2" src="car_2.png" />
         <img alt="ufo" id="ufo" src="ufo.png" />
         <img alt="gameover" id="gameover" src="gameover.jpg" />
+        <img onclick="startGame()" alt="start" id="start" src="start.png" />
     </div>
     <script type="text/javascript" src="script.js"></script>
 </body>
